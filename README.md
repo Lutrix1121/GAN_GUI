@@ -33,21 +33,23 @@ Architecture:
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• tkinter (usually comes with Python).
 
  🚀 Installation:  
- 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Clone the repository:  
+ 
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Clone the repository:  
   
 	git clone https://github.com/Lutrix1121/GAN_GUI.git
 
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Install the dependencies:  
 
-   >cd GAN_GUI  
-   >pip install -r requirements.txt
+	cd GAN_GUI  
+	pip install -r requirements.txt
 
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Run the application:  
 
-   >python gui.py
+	python gui.py
 
 📖 Usage  
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Setup Paths:   
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Setup Paths:   
  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Click "Setup Paths" to configure your data file and save location,   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Select your CSV file (semicolon-separated),   
