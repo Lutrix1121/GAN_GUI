@@ -1,5 +1,4 @@
-# GAN_GUI
-GAN Synthetic Data Generator
+# GAN_GUI - GAN Synthetic Data Generator
 A comprehensive GUI application for generating synthetic tabular data using Generative Adversarial Networks (GANs). This tool provides an intuitive interface for training GANs on CSV datasets and generating high-quality synthetic samples with automated parameter optimization capabilities.
 
 Architecture:  
@@ -97,7 +96,7 @@ Core Components:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Results Management: Comprehensive logging and analysis,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Performance Metrics: Tracks discriminator/generator losses,  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. GUI Interface (gui.py):  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. GUI Interface:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Setup Wizard: File selection and configuration,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Parameter Input: User-friendly forms with tooltips,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Progress Tracking: Real-time training updates,  
@@ -127,7 +126,9 @@ Data Flow:
 
 To do List:  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Bug fixing,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Bug fixing, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Progress bar for the process of finding parameters, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Allowing user to choose the class for which samples should be generated, 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Making an executable file for easier launching,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Splitting the gui file into smaller functions for easier editing,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Providing the option in GUI to change generator and discriminator layers and activation functions,  
