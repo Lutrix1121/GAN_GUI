@@ -128,9 +128,8 @@ To do List:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Bug fixing,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Progress bar for the process of finding parameters,  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Allowing user to choose the class for which samples should be generated,  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Making an executable file for easier launching,  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Splitting the gui file into smaller functions for easier editing,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• ~~Allowing user to choose the class for which samples should be generated,~~  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• ~~Splitting the gui file into smaller functions for easier editing,~~  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Providing the option in GUI to change generator and discriminator layers and activation functions,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Visualization of training results viewable from GUI,  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• In further future: GUI for transformer synthetic data generator (I have the transformer, just need to implement GUI into it).  
