@@ -6,7 +6,7 @@ from GUI_tooltip import ToolTip
 def generateSamples(gui):
     new_window = tk.Toplevel(gui)
     new_window.title("Generate Samples")
-    new_window.geometry("500x600")
+    new_window.geometry("500x700")
     new_window.resizable(width=False, height=False)
     
     def startGeneration():
@@ -28,6 +28,7 @@ def generateSamples(gui):
                 tk.messagebox.showerror("Error", "Sample size must be a positive integer!")
                 return
                 
+            targetClass = int(target_class_entry.get()) if target_class_entry.get() else None
             epochs = int(epochs_entry.get()) if epochs_entry.get() else 1000
             batchSize = int(batch_size_entry.get()) if batch_size_entry.get() else 96
             latentDim = int(latent_dim_entry.get()) if latent_dim_entry.get() else 20
@@ -49,7 +50,7 @@ def generateSamples(gui):
             history = gan.train(epochs=epochs, batch_size=batchSize, verbose=1)
             
             # Generate samples
-            generated_samples = gan.generate_samples(sampleSize)
+            generated_samples = gan.generate_samples(sampleSize, target_class=targetClass)
             
             # Save generated samples
             output_filename = f"Generated_Samples_{sampleSize}.csv"
@@ -72,8 +73,15 @@ def generateSamples(gui):
     class_label.pack(pady=5)
     class_entry = tk.Entry(new_window, font=("Arial", 10), width=30)
     class_entry.pack(pady=5)
-    
-    # Sample size input (main new feature)
+
+    # Target class input
+    target_class_label = tk.Label(new_window, text="Target class (optional)", font=("Arial", 10))
+    target_class_label.pack(pady=5)
+    target_class_entry = tk.Entry(new_window, font=("Arial", 10), width=30)
+    target_class_entry.pack(pady=5)
+    ToolTip(target_class_entry, "Specific class to generate. Leave empty to generate mixed classes.")
+
+    # Sample size input
     sample_size_label = tk.Label(new_window, text="Number of samples to generate", font=("Arial", 10))
     sample_size_label.pack(pady=5)
     sample_size_entry = tk.Entry(new_window, font=("Arial", 10), width=30)
