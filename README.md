@@ -1,4 +1,4 @@
-# GAN_GUI - GAN Synthetic Data Generator
+# GAN_GUI - GUI for GAN Synthetic Data Generator
 A comprehensive GUI application for generating synthetic tabular data using Generative Adversarial Networks (GANs). This tool provides an intuitive interface for training GANs on CSV datasets and generating high-quality synthetic samples with automated parameter optimization capabilities.
 
 Architecture:  
