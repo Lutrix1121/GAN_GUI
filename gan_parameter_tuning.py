@@ -227,11 +227,18 @@ class GANTuner:
     
     def _modify_gan_architecture(self, gan, params):
         """Modify GAN architecture based on parameters"""
-        # This is a placeholder - you would implement this based on which
-        # architectural parameters you want to tune
-        # For example, you might rebuild the generator and discriminator with
-        # different layer sizes, activation functions, etc.
-        pass
+        gen_layers = params.get('gen_layers')
+        disc_layers = params.get('disc_layers')
+        learning_rate = params.get('learning_rate')
+        beta1 = params.get('beta1')
+        
+        # Rebuild the GAN with new architecture if layer configurations are provided
+        gan.rebuild_with_params(
+            gen_layers=gen_layers,
+            disc_layers=disc_layers,
+            learning_rate=learning_rate,
+            beta1=beta1
+    )
     
     def _save_trial_results(self, trial_num, params, history, samples):
         """Save results from a single trial"""
@@ -367,7 +374,8 @@ class GANTuner:
             plt.close()
 '''
 def search(classLabel, epoch, numIterations, latentDim, batchSize, learningRate, beta1, data_path=None, 
-           results_dir=None, search_type='grid', integer_columns=None, progress_callback=None):
+           gen_layers=None, disc_layers=None, results_dir=None, search_type='grid', integer_columns=None,
+            progress_callback=None):
     '''
     parser = argparse.ArgumentParser(description='TabularGAN Parameter Tuning')
     parser.add_argument('--data', type=str, default=gui.pickingTheFile, help='Path to data CSV file')
@@ -394,6 +402,11 @@ def search(classLabel, epoch, numIterations, latentDim, batchSize, learningRate,
         'learning_rate': [float(x) for x in learningRate],
         'beta1': [float(x) for x in beta1]
     }
+
+    if gen_layers:
+        param_grid['gen_layers'] = gen_layers
+    if disc_layers:
+        param_grid['disc_layers'] = disc_layers
     
     # Run search
     if search_type == 'grid':
