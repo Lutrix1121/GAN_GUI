@@ -6,6 +6,7 @@ import json
 import os
 from datetime import datetime
 from tabular_gan_modified import TabularGAN
+import matplotlib as plt
 
 def convert_numpy_types(obj):
     """Convert numpy types to native Python types for JSON serialization"""
@@ -264,7 +265,7 @@ class GANTuner:
         samples.to_csv(os.path.join(trial_dir, "samples.csv"), sep=";", index=False)
         
         # Generate and save plots
-        #self._create_learning_curves(history, os.path.join(trial_dir, "learning_curves.png"))
+        self._create_learning_curves(history, os.path.join(trial_dir, "learning_curves.png"))
     
     def _save_overall_results(self):
         """Save overall results from all trials"""
@@ -304,7 +305,7 @@ class GANTuner:
             f.write(f"  Discriminator loss: {self.results[best_idx]['final_d_loss']:.4f}\n")
             f.write(f"  Discriminator accuracy: {self.results[best_idx]['final_d_accuracy']:.4f}\n")
             f.write(f"  Training epochs: {self.results[best_idx]['n_epochs']}\n")
-    '''
+    
     def _create_learning_curves(self, history, save_path):
         """Create and save learning curves"""
         epochs = range(1, len(history['d_loss']) + 1)
@@ -338,41 +339,54 @@ class GANTuner:
         plt.tight_layout()
         plt.savefig(save_path)
         plt.close()
-    '''
-    '''
+    
     def visualize_results(self):
         """Visualize results from the tuning process"""
-        results_df = pd.read_csv(os.path.join(self.results_dir, "all_results.csv"))
+        try:
+            results_df = pd.read_csv(os.path.join(self.results_dir, "all_results.csv"))
         
         # Create output directory for visualizations
-        viz_dir = os.path.join(self.results_dir, "visualizations")
-        if not os.path.exists(viz_dir):
-            os.makedirs(viz_dir)
-        
-        # Visualize impact of different parameters on generator loss
-        param_cols = [col for col in results_df.columns if col.startswith('param_')]
-        
-        for param in param_cols:
-            param_name = param[6:]  # Remove 'param_' prefix
+            viz_dir = os.path.join(self.results_dir, "visualizations")
+            if not os.path.exists(viz_dir):
+                os.makedirs(viz_dir)
             
-            plt.figure(figsize=(10, 6))
-            plt.scatter(results_df[param], results_df['final_g_loss'])
-            plt.title(f'Impact of {param_name} on Generator Loss')
-            plt.xlabel(param_name)
-            plt.ylabel('Final Generator Loss')
-            plt.grid(True)
-            plt.savefig(os.path.join(viz_dir, f"{param_name}_vs_g_loss.png"))
-            plt.close()
+            # Visualize impact of different parameters on generator loss
+            param_cols = [col for col in results_df.columns if col.startswith('param_')]
             
-            plt.figure(figsize=(10, 6))
-            plt.scatter(results_df[param], results_df['final_d_accuracy'])
-            plt.title(f'Impact of {param_name} on Discriminator Accuracy')
-            plt.xlabel(param_name)
-            plt.ylabel('Final Discriminator Accuracy')
-            plt.grid(True)
-            plt.savefig(os.path.join(viz_dir, f"{param_name}_vs_d_accuracy.png"))
-            plt.close()
-'''
+            for param in param_cols:
+                param_name = param[6:]  # Remove 'param_' prefix
+                
+                plt.figure(figsize=(10, 6))
+                plt.scatter(results_df[param], results_df['final_g_loss'])
+                plt.title(f'Impact of {param_name} on Generator Loss')
+                plt.xlabel(param_name)
+                plt.ylabel('Final Generator Loss')
+                plt.grid(True)
+                plt.savefig(os.path.join(viz_dir, f"{param_name}_vs_g_loss.png"))
+                plt.close()
+                
+                plt.figure(figsize=(10, 6))
+                plt.scatter(results_df[param], results_df['final_d_accuracy'])
+                plt.title(f'Impact of {param_name} on Discriminator Accuracy')
+                plt.xlabel(param_name)
+                plt.ylabel('Final Discriminator Accuracy')
+                plt.grid(True)
+                plt.savefig(os.path.join(viz_dir, f"{param_name}_vs_d_accuracy.png"))
+                plt.close()
+
+                plt.figure(figsize=(10, 6))
+                plt.scatter(results_df[param], results_df['final_d_loss'])
+                plt.title(f'Impact of {param_name} on Discriminator Loss')
+                plt.xlabel(param_name)
+                plt.ylabel('Final Discriminator Loss')
+                plt.grid(True)
+                plt.savefig(os.path.join(viz_dir, f"{param_name}_vs_d_loss.png"))
+                plt.close()
+            
+            print(f"Visualizations saved to {viz_dir}/")
+        except Exception as e:
+            print(f"Error creating visualizations: {str(e)}")
+
 def search(classLabel, epoch, numIterations, latentDim, batchSize, learningRate, beta1, data_path=None, 
            gen_layers=None, disc_layers=None, results_dir=None, search_type='grid', integer_columns=None,
             progress_callback=None):
@@ -427,7 +441,7 @@ def search(classLabel, epoch, numIterations, latentDim, batchSize, learningRate,
         )
     
     # Visualize results
-    #tuner.visualize_results()
+    tuner.visualize_results()
     
     print(f"\nParameter tuning complete! Results saved to {results.dir}/")
     print(f"Best parameters saved to {results_dir}/best_params.json")
