@@ -6,7 +6,7 @@ import json
 import os
 from datetime import datetime
 from tabular_gan_modified import TabularGAN
-import matplotlib as plt
+from matplotlib import pyplot as plt
 
 def convert_numpy_types(obj):
     """Convert numpy types to native Python types for JSON serialization"""
@@ -263,7 +263,7 @@ class GANTuner:
         
         # Save generated samples
         samples.to_csv(os.path.join(trial_dir, "samples.csv"), sep=";", index=False)
-        
+
         # Generate and save plots
         self._create_learning_curves(history, os.path.join(trial_dir, "learning_curves.png"))
     
@@ -443,5 +443,5 @@ def search(classLabel, epoch, numIterations, latentDim, batchSize, learningRate,
     # Visualize results
     tuner.visualize_results()
     
-    print(f"\nParameter tuning complete! Results saved to {results.dir}/")
+    print(f"\nParameter tuning complete! Results saved to {results_dir}/")
     print(f"Best parameters saved to {results_dir}/best_params.json")

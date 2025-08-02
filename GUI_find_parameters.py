@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import GUI_globals as globals
 from GUI_tooltip import ToolTip
+import os
 
 
 class FindParametersWindow:
@@ -243,6 +244,18 @@ class FindParametersWindow:
         )
         cancel_button.pack(side='left', padx=10)
     
+    def visualize_results(self):
+        visualizations_button = tk.Button(
+            self.window, 
+            text="Open visualizations directory",
+            command=lambda: os.startfile(globals.SAVEPATH + '/visualizations'),
+            font=("Arial", 12), 
+            width=25, 
+            height=2, 
+            bg=self.current_theme['generate_bg']
+        )
+        visualizations_button.pack(pady=10)
+    
     def on_search_type_change(self):
         """Callback function to update UI when search type changes"""
         search_type = self.search_var.get()
@@ -427,7 +440,12 @@ class FindParametersWindow:
             )
             
             self.window.destroy()
-            messagebox.showinfo("Success", "Parameter search completed!")
+            messagebox.showinfo(
+                "Success",
+                f"Parameter search completed!\n"
+                f"Results saved to: {globals.SAVEPATH}\n"
+                f"Visualizations of results can be found in: {globals.SAVEPATH}/visualizations"
+            )
             
         except ValueError as e:
             messagebox.showerror("Error", f"Invalid input: {e}")
