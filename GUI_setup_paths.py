@@ -50,7 +50,6 @@ class SetupPathsWindow:
         self.create_control_buttons()
     
     def create_file_section(self):
-        """Create file selection section"""
         file_frame = tk.Frame(self.window, bg=self.current_theme['bg'])
         file_frame.pack(pady=20, padx=20, fill='x')
         
@@ -84,7 +83,6 @@ class SetupPathsWindow:
         self.file_status_label.pack(pady=5)
     
     def create_integer_columns_section(self):
-        """Create integer columns specification section"""
         integer_frame = tk.Frame(self.window, bg=self.current_theme['bg'])
         integer_frame.pack(pady=20, padx=20, fill='x')
         
@@ -110,7 +108,6 @@ class SetupPathsWindow:
         self.integer_entry.pack(pady=5, fill='x')
     
     def create_save_path_section(self):
-        """Create save path selection section"""
         path_frame = tk.Frame(self.window, bg=self.current_theme['bg'])
         path_frame.pack(pady=20, padx=20, fill='x')
         
@@ -144,7 +141,6 @@ class SetupPathsWindow:
         self.path_status_label.pack(pady=5)
     
     def create_control_buttons(self):
-        """Create control buttons"""
         button_frame = tk.Frame(self.window, bg=self.current_theme['bg'])
         button_frame.pack(pady=30)
         
@@ -171,7 +167,6 @@ class SetupPathsWindow:
         cancel_button.pack(side='left', padx=10)
     
     def select_file(self):
-        """Handle file selection"""
         filename = filedialog.askopenfilename(
             title="Select Data File",
             filetypes=[("CSV files", "*.csv"), ("All files", "*.*")]
@@ -185,10 +180,11 @@ class SetupPathsWindow:
             self.file_label.config(text=f"Selected: {os.path.basename(globals.FILENAME)}")
     
     def select_save_path(self):
-        """Handle save path selection"""
         savepath = filedialog.askdirectory(title="Select Save Location")
         if savepath:
-            globals.SAVEPATH = savepath
+            globals.SAVEPATH = os.path.join(savepath + "/tuning_results")
+            if not os.path.exists(globals.SAVEPATH):
+                os.makedirs(globals.SAVEPATH)
             self.path_status_label.config(text=f"Save to: {globals.SAVEPATH}", fg='green')
             self.path_label.config(text=f"Save to: {globals.SAVEPATH}")
     
