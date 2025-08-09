@@ -129,6 +129,6 @@ Core Components:
 - ~~Progress bar for the process of finding parameters,~~  
 - ~~Allowing user to choose the class for which samples should be generated,~~  
 - ~~Splitting the gui file into smaller functions for easier editing,~~  
-- ~~Providing the option in GUI to change generator and discriminator layers~~ and activation functions,  
-- Visualization of training results viewable from GUI,  
+- ~~Providing the option in GUI to change generator and discriminator layers,~~  
+- ~~Visualization of training results viewable from GUI~~ (Partially done, program informs where are the visualizations stored),  
 - In further future: GUI for transformer synthetic data generator (I have the transformer, just need to implement GUI into it).  
